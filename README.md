@@ -5,9 +5,18 @@
 
 ## Overview
 
-This lab simulates a real-world adversarial attack scenario against a monitored endpoint, with full detection, investigation, and response documentation. Built from scratch using VirtualBox, Ubuntu Server 22.04, and Kali Linux, the environment replicates a SOC analyst's day-to-day workflow — from initial alert triage to threat hunting and custom detection rule development.
+This lab simulates a real-world adversarial attack scenario against a 
+monitored endpoint, with full detection, investigation, and response 
+documentation. Built from scratch using VirtualBox, Ubuntu Server 22.04, 
+and Kali Linux, the environment replicates a SOC analyst's day-to-day 
+workflow — from initial alert triage to threat hunting and custom 
+detection rule development.
 
-The lab goes beyond basic SIEM setup. I deployed Wazuh as a full XDR platform, executed a multi-stage attack chain against the monitored server, wrote custom detection rules to close gaps in default coverage, built a custom SOC dashboard, and conducted structured threat hunts using DQL queries mapped to MITRE ATT&CK tactics.
+The lab goes beyond basic SIEM setup. I deployed Wazuh as a full XDR 
+platform, executed a multi-stage attack chain against the monitored 
+server, wrote custom detection rules to close gaps in default coverage, 
+built a custom SOC dashboard, and conducted structured threat hunts 
+using DQL queries mapped to MITRE ATT&CK tactics.
 
 ---
 
@@ -55,13 +64,15 @@ The attack followed a realistic kill chain across 8 stages:
 - **173,703** authentication failure events detected
 - **213,320** total security events over 48-hour period
 - **6 custom detection rules** deployed and validated
-- **4 MITRE ATT&CK tactics** detected: Defense Evasion, Privilege Escalation, Persistence, Initial Access
+- **4 MITRE ATT&CK tactics** detected: Defense Evasion, 
+  Privilege Escalation, Persistence, Initial Access
 
 ---
 
 ## Custom Detection Rules
 
-Six custom rules were written to close gaps in Wazuh's default detection coverage:
+Six custom rules were written to close gaps in Wazuh's default 
+detection coverage:
 
 | Rule ID | Level | Description | MITRE |
 |---------|-------|-------------|-------|
@@ -78,7 +89,8 @@ Six custom rules were written to close gaps in Wazuh's default detection coverag
 
 ## Threat Hunting
 
-Three structured threat hunts were conducted using DQL queries against the Wazuh indexer:
+Three structured threat hunts were conducted using DQL queries 
+against the Wazuh indexer:
 
 | Hunt | Query | Findings |
 |------|-------|----------|
@@ -102,11 +114,14 @@ Three structured threat hunts were conducted using DQL queries against the Wazuh
 | Initial Access | T1078 |
 | Credential Access | T1003.008, T1110.001 |
 
+![MITRE ATT&CK Events](screenshots/mitre-attack-events-kali-agent.png)
+
 ---
 
 ## Custom SOC Dashboard
 
-A custom dashboard was built in the Wazuh OpenSearch interface with 8 visualizations:
+A custom dashboard was built in the Wazuh OpenSearch interface 
+with 8 visualizations:
 
 - Attack Timeline by Agent
 - Alert Severity Breakdown
@@ -117,7 +132,8 @@ A custom dashboard was built in the Wazuh OpenSearch interface with 8 visualizat
 - Critical and High Alerts Timeline
 - PCI DSS Compliance Violations
 
-![SOC Dashboard](screenshots/dashboard-1-soc-operations-complete.png)
+![SOC Dashboard Top](screenshots/dashboard-1-soc-operations-complete.png)
+![SOC Dashboard Bottom](screenshots/dashboard-1-soc-operations-bottom.png)
 
 ---
 
@@ -132,6 +148,63 @@ Every alert was automatically mapped to compliance frameworks:
 | **HIPAA** | 164.312.b, 164.312.a.2.I, 164.312.c.1 |
 | **NIST 800-53** | AU.14, AC.7, AC.2, IA.4, SI.7 |
 
+![PCI DSS Compliance](screenshots/pci-dss-compliance-page.png)
+
 ---
 
 ## Repository Structure
+
+wazuh-siem-detection-lab/
+├── README.md
+├── architecture/
+│ └── network-diagram.png
+├── setup/
+│ ├── 01-virtualbox-setup.md
+│ ├── 02-ubuntu-server-install.md
+│ ├── 03-wazuh-manager-install.md
+│ └── 04-kali-agent-deploy.md
+├── attack-simulation/
+│ ├── 01-reconnaissance.md
+│ ├── 02-credential-attacks.md
+│ ├── 03-web-attacks.md
+│ ├── 04-fim-tampering.md
+│ ├── 05-persistence.md
+│ └── 06-log-tampering.md
+├── detection-engineering/
+│ ├── custom-rules/
+│ │ └── local_rules.xml
+│ └── rule-analysis.md
+├── threat-hunting/
+│ ├── hunting-queries.md
+│ └── hunting-findings.md
+├── incident-response/
+│ ├── ir-playbook.md
+│ └── incident-report.md
+├── mitre-attack/
+│ └── attack-mapping.md
+├── screenshots/
+└── lessons-learned/
+└── lessons-learned.md
+
+
+---
+
+## Skills Demonstrated
+
+- SIEM deployment and configuration (Wazuh 4.12)
+- Detection rule engineering (XML, MITRE mapping)
+- Adversary simulation (8 attack techniques)
+- Threat hunting (DQL queries, tactic-based investigation)
+- Vulnerability assessment (CVE identification, risk analysis)
+- Incident response (alert triage, evidence collection)
+- Compliance monitoring (PCI DSS, GDPR, HIPAA, NIST)
+- Custom dashboard development (OpenSearch visualizations)
+- Linux administration (Ubuntu Server, netplan, LVM)
+
+---
+
+## Tools Used
+
+`Wazuh 4.12` `Kali Linux` `nmap` `Hydra` `Nikto` `Dirb` 
+`Wfuzz` `VirtualBox` `Ubuntu Server 22.04` `OpenSSH` 
+`OpenSearch Dashboards`
