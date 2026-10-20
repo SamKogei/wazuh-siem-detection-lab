@@ -1,0 +1,49 @@
+<group name="local,custom_rules">
+
+<!-- Custom Detection Rules — Wazuh SIEM Lab -->
+
+<rule id="100001" level="10">
+  <if_sid>40101</if_sid>
+  <description>Possible stealth port scan detected from known attacker IP</description>
+  <mitre>
+    <id>T1595.001</id>
+  </mitre>
+</rule>
+
+<rule id="100002" level="14">
+  <if_sid>5402</if_sid>
+  <match>/etc/shadow</match>
+  <description>Critical: Attempted access to /etc/shadow — credential harvesting</description>
+  <mitre>
+    <id>T1003.008</id>
+  </mitre>
+</rule>
+
+<rule id="100003" level="12">
+  <if_sid>554</if_sid>
+  <match>/etc/cron.d</match>
+  <description>New file added to cron.d — possible persistence mechanism</description>
+  <mitre>
+    <id>T1053.003</id>
+  </mitre>
+</rule>
+
+<rule id="100004" level="13">
+  <if_sid>5402</if_sid>
+  <match>truncate</match>
+  <description>Critical: Log file cleared using truncate — attacker covering tracks</description>
+  <mitre>
+    <id>T1070.002</id>
+  </mitre>
+</rule>
+
+<rule id="100006" level="15">
+  <if_sid>5902</if_sid>
+  <match>backdoor</match>
+  <description>CRITICAL: Backdoor user account created on system</description>
+  <mitre>
+    <id>T1136.001</id>
+  </mitre>
+</rule>
+
+</group>
