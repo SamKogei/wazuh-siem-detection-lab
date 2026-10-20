@@ -1,7 +1,7 @@
 # Adversary Simulation & Detection Engineering Lab
 ### Wazuh SIEM | MITRE ATT&CK | Custom Rules | Threat Hunting
 
-![Wazuh Dashboard](screenshots/wazuh-01-overview-dashboard.png)
+![Wazuh Dashboard](screenshots/wazuh-dashboard-overview.png)
 
 ## Overview
 
@@ -74,7 +74,7 @@ Six custom rules were written to close gaps in Wazuh's default detection coverag
 | 100005 | 14 | SSH brute force threshold exceeded (10+ failures in 60s) | T1110.001 |
 | 100006 | 15 | Backdoor user account created on system | T1136.001 |
 
-![Custom Rules Firing](screenshots/detection-03-custom-rules-firing.png)
+![Custom Rules Firing](screenshots/custom-rules-firing-all.png)
 
 ---
 
@@ -88,13 +88,13 @@ Three structured threat hunts were conducted using DQL queries against the Wazuh
 | Persistence Hunt | `rule.mitre.tactic: "Persistence"` | 106 hits — Rule 100006 confirmed fired |
 | Defense Evasion Hunt | `rule.mitre.tactic: "Defense Evasion"` | 189 hits — Rule 100004 confirmed fired |
 
-![Brute Force Hunt](screenshots/threat-hunt-01-brute-force.png)
+![Brute Force Hunt](screenshots/threat-hunt-01-brute-force-kali.png)
 
 ---
 
 ## MITRE ATT&CK Coverage
 
-![MITRE ATT&CK Framework](screenshots/mitre-02-framework-matrix.png)
+![MITRE ATT&CK Framework](screenshots/mitre-attack-framework-matrix.png)
 
 | **Tactic** | **Detections** | **Techniques** |
 |------------|---------------|----------------|
@@ -105,7 +105,7 @@ Three structured threat hunts were conducted using DQL queries against the Wazuh
 
 Credential Access registers zero on the Kali agent because shadow file access was executed directly on the wazuhmanager host — those events are attributed to agent 000, not agent 002.
 
-![MITRE ATT&CK Events](screenshots/mitre-01-kali-agent-events.png)
+![MITRE ATT&CK Events](screenshots/mitre-attack-events-kali-agent.png)
 
 ---
 
@@ -122,8 +122,8 @@ A custom dashboard named "SOC Operations Overview" was built in OpenSearch with 
 - Critical and High Alerts Timeline
 - PCI DSS Compliance Violations
 
-![SOC Dashboard Top](screenshots/dashboard-01-soc-top.png)
-![SOC Dashboard Bottom](screenshots/dashboard-02-soc-bottom.png)
+![SOC Dashboard Top](screenshots/dashboard-1-soc-operations-complete.png)
+![SOC Dashboard Bottom](screenshots/dashboard-1-soc-operations-bottom.png)
 
 ---
 
@@ -138,7 +138,7 @@ Wazuh automatically mapped alerts to compliance frameworks. The controls below r
 | HIPAA | 164.312.b, 164.312.a.2.I, 164.312.a.2.II, 164.312.c.1, 164.312.c.2 |
 | NIST 800-53 | AU.14, AC.7, AC.2, IA.4, SI.7 |
 
-![PCI DSS Compliance](screenshots/kali-agent-02-pci-dss.png)
+![PCI DSS Compliance](screenshots/pci-dss-compliance-page.png)
 
 ---
 
