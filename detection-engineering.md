@@ -1,8 +1,8 @@
 # Detection Engineering
 
-Five custom rules were written and deployed to `/var/ossec/etc/rules/local_rules.xml` on the Wazuh manager. The goal wasn't to replace default rules — it was to extend them where they fell short: wrong severity level, missing context, or no coverage at all for specific techniques used in the simulation.
+Five custom rules were written and deployed to `/var/ossec/etc/rules/local_rules.xml` on the Wazuh manager. The goal wasn't to replace default rules, it was to extend them where they fell short: wrong severity level, missing context, or no coverage at all for specific techniques used in the simulation.
 
-All rules follow Wazuh's chaining model — they build on existing rule SIDs rather than trying to parse raw logs independently. Each one was validated by running the attack technique and confirming the alert fired in the Wazuh indexer.
+All rules follow Wazuh's chaining model, they build on existing rule SIDs rather than trying to parse raw logs independently. Each one was validated by running the attack technique and confirming the alert fired in the Wazuh indexer.
 
 ---
 

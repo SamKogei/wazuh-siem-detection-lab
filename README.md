@@ -5,7 +5,7 @@
 
 ## Overview
 
-This lab simulates a real-world adversarial attack scenario against a monitored endpoint, with full detection, investigation, and response documentation. Built from scratch using VirtualBox, Ubuntu Server 22.04, and Kali Linux, the environment replicates a SOC analyst's day-to-day workflow — from initial alert triage to threat hunting and custom detection rule development.
+This lab simulates a real-world adversarial attack scenario against a monitored endpoint, with full detection, investigation, and response documentation. Built from scratch using VirtualBox, Ubuntu Server 22.04, and Kali Linux, the environment replicates a SOC analyst's day-to-day workflow, from initial alert triage to threat hunting and custom detection rule development.
 
 The lab goes beyond basic SIEM setup. I deployed Wazuh as a full XDR platform, executed a multi-stage attack chain against the monitored server, wrote custom detection rules to close gaps in default coverage, built a custom SOC dashboard, and conducted structured threat hunts using DQL queries mapped to MITRE ATT&CK tactics.
 
