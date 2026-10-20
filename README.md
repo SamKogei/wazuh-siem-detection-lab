@@ -154,37 +154,39 @@ Every alert was automatically mapped to compliance frameworks:
 
 ## Repository Structure
 
+```
 wazuh-siem-detection-lab/
 ├── README.md
 ├── architecture/
-│ └── network-diagram.png
+│   └── network-diagram.png
 ├── setup/
-│ ├── 01-virtualbox-setup.md
-│ ├── 02-ubuntu-server-install.md
-│ ├── 03-wazuh-manager-install.md
-│ └── 04-kali-agent-deploy.md
+│   ├── 01-virtualbox-setup.md
+│   ├── 02-ubuntu-server-install.md
+│   ├── 03-wazuh-manager-install.md
+│   └── 04-kali-agent-deploy.md
 ├── attack-simulation/
-│ ├── 01-reconnaissance.md
-│ ├── 02-credential-attacks.md
-│ ├── 03-web-attacks.md
-│ ├── 04-fim-tampering.md
-│ ├── 05-persistence.md
-│ └── 06-log-tampering.md
+│   ├── 01-reconnaissance.md
+│   ├── 02-credential-attacks.md
+│   ├── 03-web-attacks.md
+│   ├── 04-fim-tampering.md
+│   ├── 05-persistence.md
+│   └── 06-log-tampering.md
 ├── detection-engineering/
-│ ├── custom-rules/
-│ │ └── local_rules.xml
-│ └── rule-analysis.md
+│   ├── custom-rules/
+│   │   └── local_rules.xml
+│   └── rule-analysis.md
 ├── threat-hunting/
-│ ├── hunting-queries.md
-│ └── hunting-findings.md
+│   ├── hunting-queries.md
+│   └── hunting-findings.md
 ├── incident-response/
-│ ├── ir-playbook.md
-│ └── incident-report.md
+│   ├── ir-playbook.md
+│   └── incident-report.md
 ├── mitre-attack/
-│ └── attack-mapping.md
+│   └── attack-mapping.md
 ├── screenshots/
 └── lessons-learned/
-└── lessons-learned.md
+    └── lessons-learned.md
+```
 
 
 ---
