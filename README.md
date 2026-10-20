@@ -13,6 +13,8 @@ The lab goes beyond basic SIEM setup. I deployed Wazuh as a full XDR platform, e
 
 ## Environment
 
+![Lab Architecture](screenshots/architecture-diagram.png)
+
 | **Component** | **Details** |
 |---------------|-------------|
 | Host OS | Windows 11 |
