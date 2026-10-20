@@ -157,35 +157,17 @@ Every alert was automatically mapped to compliance frameworks:
 ```
 wazuh-siem-detection-lab/
 ├── README.md
-├── architecture/
-│   └── network-diagram.png
-├── setup/
-│   ├── 01-virtualbox-setup.md
-│   ├── 02-ubuntu-server-install.md
-│   ├── 03-wazuh-manager-install.md
-│   └── 04-kali-agent-deploy.md
-├── attack-simulation/
-│   ├── 01-reconnaissance.md
-│   ├── 02-credential-attacks.md
-│   ├── 03-web-attacks.md
-│   ├── 04-fim-tampering.md
-│   ├── 05-persistence.md
-│   └── 06-log-tampering.md
-├── detection-engineering/
-│   ├── custom-rules/
-│   │   └── local_rules.xml
-│   └── rule-analysis.md
-├── threat-hunting/
-│   ├── hunting-queries.md
-│   └── hunting-findings.md
-├── incident-response/
-│   ├── ir-playbook.md
-│   └── incident-report.md
-├── mitre-attack/
-│   └── attack-mapping.md
+├── setup.md
+├── attack-simulation.md
+├── detection-engineering.md
+├── threat-hunting.md
+├── incident-report.md
+├── mitre-attack.md
+├── lessons-learned.md
 ├── screenshots/
-└── lessons-learned/
-    └── lessons-learned.md
+└── detection-engineering/
+    └── custom-rules/
+        └── local_rules.xml
 ```
 
 
