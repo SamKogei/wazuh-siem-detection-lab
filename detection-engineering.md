@@ -1,6 +1,6 @@
 # Detection Engineering
 
-Six custom rules were written and deployed to `/var/ossec/etc/rules/local_rules.xml` on the Wazuh manager. The goal wasn't to replace default rules — it was to extend them where they fell short: wrong severity level, missing context, or no coverage at all for specific techniques used in the simulation.
+Five custom rules were written and deployed to `/var/ossec/etc/rules/local_rules.xml` on the Wazuh manager. The goal wasn't to replace default rules — it was to extend them where they fell short: wrong severity level, missing context, or no coverage at all for specific techniques used in the simulation.
 
 All rules follow Wazuh's chaining model — they build on existing rule SIDs rather than trying to parse raw logs independently. Each one was validated by running the attack technique and confirming the alert fired in the Wazuh indexer.
 
@@ -33,7 +33,6 @@ All services cycled clean on Wazuh v4.12.0.
   <mitre>
     <id>T1595.001</id>
   </mitre>
-  <group>recon,port_scan</group>
 </rule>
 ```
 
@@ -52,7 +51,6 @@ Wazuh's default Rule 40101 detects port scans but fires at level 6 with no MITRE
   <mitre>
     <id>T1003.008</id>
   </mitre>
-  <group>credential_access,high_severity</group>
 </rule>
 ```
 
@@ -73,7 +71,6 @@ The default Rule 5402 fires for any successful sudo execution at level 3 — far
   <mitre>
     <id>T1053.003</id>
   </mitre>
-  <group>persistence,high_severity</group>
 </rule>
 ```
 
@@ -87,37 +84,17 @@ Wazuh's FIM Rule 554 fires on any file addition across monitored directories at 
 ```xml
 <rule id="100004" level="13">
   <if_sid>5402</if_sid>
-  <match>/usr/bin/truncate</match>
+  <match>truncate</match>
   <description>Critical: Log file cleared using truncate — attacker covering tracks</description>
   <mitre>
     <id>T1070.002</id>
   </mitre>
-  <group>defense_evasion,high_severity</group>
 </rule>
 ```
 
-Like Rule 100002, the default 5402 catches the sudo execution but doesn't distinguish log clearing from any other privileged command. This rule chains off 5402 and matches on `/usr/bin/truncate` in the command field. It fired twice — once for auth.log and once for syslog, captured through journald even after the files were wiped.
+Like Rule 100002, the default 5402 catches the sudo execution but doesn't distinguish log clearing from any other privileged command. This rule chains off 5402 and matches on `truncate` in the command field. It fired twice — once for auth.log and once for syslog, captured through journald even after the files were wiped.
 
 ![Log Tamper Alert](screenshots/log-tamper-02-wazuh-alert.png)
-
----
-
-### Rule 100005 — SSH Brute Force Threshold
-**Level:** 14 | **MITRE:** T1110.001
-
-```xml
-<rule id="100005" level="14">
-  <if_sid>5763</if_sid>
-  <same_source_ip/>
-  <description>Critical: SSH brute force threshold exceeded — 10+ failures in 60 seconds</description>
-  <mitre>
-    <id>T1110.001</id>
-  </mitre>
-  <group>authentication_failed,brute_force</group>
-</rule>
-```
-
-Wazuh's default Rule 5763 detects SSH brute force but the threshold firing at the right severity needed a dedicated rule to ensure it surfaces as a critical event. This rule aggregates failures from the same source IP within a 60-second window, raising severity to 14. Confirmed firing during the Hydra attack.
 
 ---
 
@@ -127,15 +104,15 @@ Wazuh's default Rule 5763 detects SSH brute force but the threshold firing at th
 ```xml
 <rule id="100006" level="15">
   <if_sid>5902</if_sid>
+  <match>backdoor</match>
   <description>CRITICAL: Backdoor user account created on system</description>
   <mitre>
     <id>T1136.001</id>
   </mitre>
-  <group>persistence,high_severity</group>
 </rule>
 ```
 
-The default Rule 5902 (New user added to the system) fires at level 8 — medium severity, easy to miss in a noisy environment. This rule chains off 5902 and raises it to level 15, the highest severity in Wazuh's scale, ensuring any new account creation triggers a critical alert. It fired when `bqckdoor-user` was created and was confirmed in the Persistence threat hunt (106 hits under `rule.mitre.tactic: "Persistence"`).
+The default Rule 5902 (New user added to the system) fires at level 8 — medium severity, easy to miss in a noisy environment. This rule chains off 5902 and matches on `backdoor` in the log entry, raising severity to level 15, the highest in Wazuh's scale. It was confirmed in the Persistence threat hunt (106 hits under `rule.mitre.tactic: "Persistence"`).
 
 ![Rule 5902 Detail](screenshots/persistence-03-rule-5902-detail.png)
 
@@ -159,5 +136,4 @@ rule.id: 100001 OR rule.id: 100002 OR rule.id: 100003 OR rule.id: 100004 OR rule
 | 100002 — Shadow access | Yes — 3 hits | DQL + credential harvest test |
 | 100003 — Cron job creation | Yes | FIM syscheck alerts |
 | 100004 — Log tampering | Yes — 2 hits | DQL + defense evasion test |
-| 100005 — Brute force threshold | Yes | Dashboard custom rules widget |
 | 100006 — Backdoor user | Yes | Persistence tactic hunt |

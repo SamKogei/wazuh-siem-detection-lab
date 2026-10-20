@@ -56,14 +56,14 @@ The attack followed a realistic kill chain across 8 stages:
 ### Detection Results
 - **213,320** total security events across the 48-hour simulation window
 - **173,703** authentication failures attributed to Hydra brute force from 192.168.56.103
-- **6 custom detection rules** deployed — Rules 100002, 100004, and 100006 confirmed fired
+- **5 custom detection rules** deployed — Rules 100002, 100004, and 100006 confirmed fired
 - **4 MITRE ATT&CK tactics** mapped on the Kali agent: Defense Evasion (15), Privilege Escalation (14), Persistence (8), Initial Access (8)
 
 ---
 
 ## Custom Detection Rules
 
-Six custom rules were written to close gaps in Wazuh's default detection coverage. The full rule file is at `detection-engineering/custom-rules/local_rules.xml`.
+Five custom rules were written to close gaps in Wazuh's default detection coverage. The full rule file is at `detection-engineering/custom-rules/local_rules.xml`.
 
 | **Rule ID** | **Level** | **Description** | **MITRE** |
 |-------------|-----------|-----------------|-----------|
@@ -71,7 +71,6 @@ Six custom rules were written to close gaps in Wazuh's default detection coverag
 | 100002 | 14 | /etc/shadow accessed via sudo — credential harvesting | T1003.008 |
 | 100003 | 12 | New file created in /etc/cron.d — persistence mechanism | T1053.003 |
 | 100004 | 13 | Log file cleared via truncate — attacker covering tracks | T1070.002 |
-| 100005 | 14 | SSH brute force threshold exceeded (10+ failures in 60s) | T1110.001 |
 | 100006 | 15 | Backdoor user account created on system | T1136.001 |
 
 ![Custom Rules Firing](screenshots/custom-rules-firing-all.png)

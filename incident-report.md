@@ -11,9 +11,9 @@
 
 ## Executive Summary
 
-A controlled adversarial simulation was conducted against a monitored Ubuntu Server endpoint (192.168.56.102) running Wazuh SIEM/XDR 4.12.0. The attack chain originated from Kali Linux (192.168.56.103) for reconnaissance, web enumeration, and credential attacks. Post-compromise stages, persistence, defense evasion, and credential harvesting, were executed directly on the wazuhmanager host to simulate an attacker operating on a managed endpoint after gaining access.
+A controlled adversarial simulation was conducted against a monitored Ubuntu Server endpoint (192.168.56.102) running Wazuh SIEM/XDR 4.12.0. The attack chain originated from Kali Linux (192.168.56.103) for reconnaissance, web enumeration, and credential attacks. Post-compromise stages — persistence, defense evasion, and credential harvesting — were executed directly on the wazuhmanager host to simulate an attacker operating on a managed endpoint after gaining access.
 
-Wazuh detected and logged all attack stages. Custom detection rules written specifically for this environment identified gaps in default coverage, including shadow file access and log tampering, which default rules alone would have missed at the appropriate severity level.
+Wazuh detected and logged all attack stages. Custom detection rules written specifically for this environment identified gaps in default coverage — including shadow file access and log tampering — which default rules alone would have missed at the appropriate severity level.
 
 A total of **213,320 security events** were generated over the simulation period, with **173,703 authentication failures** attributed to SSH brute force activity from 192.168.56.103.
 
@@ -196,7 +196,6 @@ id && whoami
 | 100006 — Backdoor user | Yes | Persistence detected |
 | 100001 — Stealth scan | Partial | Dependent on parent rule 40101 |
 | 100003 — Cron job | Yes | FIM syscheck confirmed |
-| 100005 — Brute force threshold | Yes | Confirmed via dashboard widget |
 
 ![Custom Rules](screenshots/custom-rules-firing-all.png)
 
